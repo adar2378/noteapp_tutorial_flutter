@@ -4,13 +4,13 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This is a code repository for the tutorials I am creating for Flutter. Youtube link: https://www.youtube.com/playlist?list=PLSzAduAyNr2VsPwUwIKWmxtYZo7bJ9r-8
 
-A few resources to get you started if this is your first Flutter project:
+We will learn:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- How to structure flutter project and separate views into small widgets
+- How to use bloc pattern for states and events to create a robust application
+- How to use an offline database to store data.
+- And many more...
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Design Credit: https://dribbble.com/shots/11875872-A-simple-and-lightweight-note-app
