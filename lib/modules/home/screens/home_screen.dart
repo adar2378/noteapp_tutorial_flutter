@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:notely/modules/home/models/note_model.dart';
+import 'package:notely/modules/home/screens/create_note_screen.dart';
 import 'package:notely/modules/home/widgets/appbar_button.dart';
 import 'package:notely/modules/home/widgets/note_tile.dart';
 
@@ -83,6 +84,19 @@ class _HomeScreenState extends State<HomeScreen> {
           right: 16,
           top: 16,
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white24,
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CreateNote(),
+              maintainState: true,
+            ),
+          );
+        },
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:notely/modules/home/screens/home_screens.dart';
+import 'package:notely/modules/home/screens/home_screen.dart';
 
 void main() {
   runApp(MyApp());
