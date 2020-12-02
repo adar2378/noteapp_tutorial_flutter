@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:notely/modules/home/blocs/note_bloc/notes_bloc.dart';
 import 'package:notely/modules/home/models/note_model.dart';
 import 'package:notely/modules/home/screens/create_note_screen.dart';
 import 'package:notely/modules/home/widgets/appbar_button.dart';
@@ -54,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 20,
         title: Text(
           "Notes",
           style: TextStyle(
@@ -70,20 +73,64 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: StaggeredGridView.countBuilder(
-        crossAxisCount: 4,
-        itemCount: notes.length,
-        itemBuilder: (BuildContext context, int index) => NoteTile(
-          noteModel: notes[index],
-        ),
-        staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
-        mainAxisSpacing: 8.0,
-        crossAxisSpacing: 8.0,
-        padding: EdgeInsets.only(
-          left: 16,
-          right: 16,
-          top: 16,
-        ),
+      body: BlocBuilder<NotesBloc, NotesState>(
+        builder: (context, state) {
+          if (state is NoteLoading) {
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              ),
+            );
+          } else if (state is NoteNoData) {
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "No notes available yet, please add one first!",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            );
+          } else if (state is NoteError) {
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Something went wrong!",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ],
+              ),
+            );
+          } else if (state is NoteData) {
+            var availableNotes = state.notes;
+            return StaggeredGridView.countBuilder(
+              crossAxisCount: 4,
+              itemCount: availableNotes.length,
+              itemBuilder: (BuildContext context, int index) => NoteTile(
+                noteModel: availableNotes[index],
+              ),
+              staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
+              padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 16,
+              ),
+            );
+          } else
+            return Container();
+        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white24,

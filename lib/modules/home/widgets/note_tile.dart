@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:notely/modules/home/models/note_model.dart';
 
 class NoteTile extends StatelessWidget {
@@ -30,7 +31,7 @@ class NoteTile extends StatelessWidget {
             ),
           ),
           Text(
-            "May 21, 2020",
+            DateFormat.yMMMMd().format(noteModel.createdat),
           ),
         ],
       ),
